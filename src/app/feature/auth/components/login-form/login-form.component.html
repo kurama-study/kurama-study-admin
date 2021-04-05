@@ -1,0 +1,27 @@
+<mdb-card >
+  <mdb-card-header>
+    <img class="img-fluid" alt="Responsive image" src="../../../../../assets/baby_kurama_by_vesrom_d8glp1n-fullview.png">
+    <span>Welcome to Kurama Admin</span>
+  </mdb-card-header>
+  <mdb-card-body class="custom-body-form">
+    <form [formGroup]="loginForm">
+      <div class="md-form form-sm">
+        <input mdbInput type="text" id="username" formControlName="email" class="form-control form-control-sm">
+        <label for="username" class="">Email</label>
+      </div>
+      <div class="md-form form-sm">
+        <input mdbInput type="password" formControlName="password" id="password" class="form-control form-control-sm">
+        <label for="password" class="">Password</label>
+      </div>
+    </form>
+    <div class="alert alert-danger small" *ngIf="error" role="alert">
+      Login fail!
+    </div>
+    <button type="button" size="sm" mdbBtn color="primary" class="waves-light" mdbWavesEffect *ngIf="!loading" (click)="onLogin()">Login</button>
+    <button mdbBtn color="primary" size="sm" *ngIf="loading" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    <a href="#" class="small float-right mt-2">Forgot password?</a>
+  </mdb-card-body>
+</mdb-card>

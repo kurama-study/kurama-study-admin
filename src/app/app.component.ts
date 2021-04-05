@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {CommonService} from './core/services/common.service';
+import {UserInfoModel} from './core/models/user-info.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'kurama-study-admin';
+  currentUser!: UserInfoModel;
+
+  constructor(private commonService: CommonService) {
+    this.commonService.currentUser.subscribe(res => {
+      this.currentUser = res;
+    });
+  }
+
 }
