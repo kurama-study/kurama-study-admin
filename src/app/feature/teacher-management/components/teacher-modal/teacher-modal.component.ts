@@ -27,7 +27,7 @@ export class TeacherModalComponent implements OnInit {
   localImgUrl!: string | ArrayBuffer | null;
 
 
-  fileToUpload!: File;
+  fileToUpload!: File | null;
 
 
   public saveButtonClicked: Subject<any> = new Subject<any>();
@@ -74,7 +74,8 @@ export class TeacherModalComponent implements OnInit {
       this.loading = false;
     });
   }
-  onSelectFile(files: FileList): void {
+  onSelectFile(value: any): void {
+    const files = value.files;
     if (files.length === 0) {
       return;
     }

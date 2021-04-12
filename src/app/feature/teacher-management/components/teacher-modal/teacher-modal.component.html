@@ -11,7 +11,7 @@
             <img *ngIf="!imgUrl && currentUser.imgUrl" sizes="sm" style="max-width: 25%;" src="{{currentUser.imgUrl}}" alt="avatar" class="img-thumbnail mt-2">
             <img class="img-thumbnail mt-2" *ngIf="imgUrl" style="width: 100px" [src]="imgUrl" >
           </a>
-          <input #file type="file" #file style="display:none;" accept='image/*' (change)="onSelectFile(file.files)" />
+          <input #file type="file" #file style="display:none;" accept='image/*' (change)="onSelectFile(file)" />
 
 
         </div>
