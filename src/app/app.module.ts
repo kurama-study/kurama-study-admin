@@ -8,6 +8,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from './core/jwt.interceptor';
 import { AngularFireModule } from '@angular/fire';
 import {environment} from '../environments/environment';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -18,9 +19,11 @@ import {environment} from '../environments/environment';
     FeatureModule,
     FeatureRouting,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+
 ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: BUCKET, useValue: 'gs://kurama-admin.appspot.com' }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,63 @@
+<div class="card">
+  <div class="card-header">
+    <h6 class="h6">Create Teacher</h6>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="teacherForm">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <a (click)="file.click()">
+            <img *ngIf="!imgUrl && !currentUser.imgUrl" style="max-width: 25%;" src="https://firebasestorage.googleapis.com/v0/b/kurama-admin.appspot.com/o/2FC7A1A6-9BE6-4FB1-96CA-06D9B325001E_1_201_a.jpeg?alt=media&token=5e89b9d5-39d9-4ff2-acfb-36c8d396c88a" alt="avatar" class="img-thumbnail mt-2">
+            <img *ngIf="!imgUrl && currentUser.imgUrl" sizes="sm" style="max-width: 25%;" src="{{currentUser.imgUrl}}" alt="avatar" class="img-thumbnail mt-2">
+            <img class="img-thumbnail mt-2" *ngIf="imgUrl" style="width: 100px" [src]="imgUrl" >
+          </a>
+          <input #file type="file" #file style="display:none;" accept='image/*' (change)="onSelectFile(file.files)" />
+
+
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" id="email" formControlName="email" [mdbValidate]="true" class="form-control">
+            <label for="email" class="">Email</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" id="name" formControlName="name" [mdbValidate]="true" class="form-control">
+            <label for="name" class="">Name</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="date" id="birth" formControlName="birthDay" [mdbValidate]="true" class="form-control">
+            <label for="birth" class="">Birth day</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" id="location" formControlName="location" [mdbValidate]="true" class="form-control">
+            <label for="location" class="">Location</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="">Major</label>
+          <ng-select [items]="listMajor" bindLabel="name" bindValue="code" [(ngModel)]="majorDefault" [ngModelOptions]="{standalone: true}"></ng-select>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="password" formControlName="password" id="password" [mdbValidate]="true" class="form-control">
+            <label for="password" class="">Password</label>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-danger" role="alert" *ngIf="mess">
+      {{mess}}
+    </div>
+    <button size="sm" *ngIf="!loading" mdbBtn type="button" color="primary" [block]="true" (click)="onSaveFile()" mdbWavesEffect>Create</button>
+    <button mdbBtn color="primary" *ngIf="loading" size="sm" [block]="true" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+  </div>
+</div>

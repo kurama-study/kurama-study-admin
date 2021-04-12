@@ -1,1 +1,65 @@
-<p>management works!</p>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="md-form">
+                <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="searchItems()" id="search-input"
+                       mdbInput>
+                <label for="search-input">Search</label>
+              </div>
+            </div>
+            <div class="col-md-4 pt-4">
+              <button size="sm" mdbBtn type="button" color="primary" (click)="onAddCourse()" [outline]="true" mdbWavesEffect>Create</button>
+            </div>
+            <div class="col-md-12 text-center mt-5 pt-5" *ngIf="loading">
+              <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="table-responsive">
+          <table mdbTable #tableEl="mdbTable" [stickyHeader]="true" [hover]="true" [striped]="true" class="z-depth-1 text-center">
+            <thead class="sticky-top">
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="elements" [sortBy]="headElements[i]"
+                  scope="col">{{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+              </th>
+            </tr>
+            </thead>
+            <tbody #row>
+            <tr  *ngFor="let el of elements; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{i+1}}</th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="red-text">{{el.name}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.total_student}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.total_lesson}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <mdb-badge [pill]="true" [success]="true" *ngIf="el.status == true">Active</mdb-badge>
+                <mdb-badge [pill]="true" [danger]="true" *ngIf="el.status == false">Pending</mdb-badge>
+              </td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <button size="sm" mdbBtn type="button" color="primary" [outline]="true" mdbWavesEffect>Detail</button>
+              </td>
+
+            </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+            <tr>
+              <td colspan="6">
+                <mdb-table-pagination [tableEl]="tableEl" paginationAlign="" [searchDataSource]="elements"></mdb-table-pagination>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

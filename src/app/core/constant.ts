@@ -10,7 +10,11 @@ export const FontURI = {
 };
 export const ApiURI = {
   LOGIN: 'auth/login',
-  LOGOUT: 'auth/logout'
+  LOGOUT: 'auth/logout',
+  GET_LIST_COURSE: 'admin/course/list',
+  GET_LIST_TEACHER: 'admin/teacher/getListTeacher',
+  CREATE_TEACHER: 'admin/teacher/createTeacher',
+  GET_DETAIL_TEACHER: 'admin/teacher/getDetailTeacher'
 };
 export const LocalStorage = {
   LOGIN_INFO: 'login_info',
