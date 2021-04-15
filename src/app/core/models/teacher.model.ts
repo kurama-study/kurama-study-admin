@@ -8,4 +8,6 @@ export interface TeacherModel {
   location: string;
   major: string;
   courses: CourseModel [];
+  imgUrl: string;
+  status: boolean;
 }

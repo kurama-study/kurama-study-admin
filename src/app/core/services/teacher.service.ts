@@ -15,4 +15,10 @@ export class TeacherService extends CommonService{
   getTeacherDetail(id: string): Observable<TeacherModel> {
     return this.get(this.CONST.ApiURI.GET_DETAIL_TEACHER + `?id=${id}`);
   }
+  deleteTeacher(teacherTd: string): Observable<any> {
+    return this.post(this.CONST.ApiURI.DELETE_TEACHER, {id: teacherTd});
+  }
+  getTeacherByMajor(majorTeacher: string): Observable<TeacherModel[]> {
+    return this.get(this.CONST.ApiURI.GET_TEACHER_BY_MAJOR + `?major=${majorTeacher}`);
+  }
 }

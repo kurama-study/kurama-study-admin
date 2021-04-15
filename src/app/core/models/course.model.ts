@@ -1,12 +1,13 @@
 import {TeacherModel} from './teacher.model';
+import {CalendarModel} from './calendar.model';
 
 export interface CourseModel {
+  code: string;
   _id: string;
   name: string;
-  total_student: number;
-  total_lesson: number;
-  calendars: [{time: string, date: Date}];
+  studentQuantity: number;
+  lessonQuantity: number;
+  calendars: CalendarModel[];
   status: boolean;
-  auth: string;
   teacher: TeacherModel;
 }

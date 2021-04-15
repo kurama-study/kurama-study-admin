@@ -1,0 +1,31 @@
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button mdbBtn type="button" color="primary" class="waves-light" size="sm" mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate" mdbWavesEffect>Previous
+      </button>
+      <button mdbBtn type="button" color="primary" class="waves-light" size="sm" mwlCalendarToday
+              [(viewDate)]="viewDate" mdbWavesEffect>Today
+      </button>
+      <button mdbBtn type="button" color="primary" class="waves-light" size="sm" mdbWavesEffect mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate">Next
+      </button>
+    </div>
+  </div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <h6 class="h6">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h6>
+  </div>
+</div>
+<br/>
+<div [ngSwitch]="view" *ngIf="calendarList">
+  <mwl-calendar-month-view
+    *ngSwitchCase="CalendarView.Month"
+    [viewDate]="viewDate"
+    [events]="events"
+  >
+  </mwl-calendar-month-view>
+</div>
+

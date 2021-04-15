@@ -17,6 +17,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 })
 export class TeacherModalComponent implements OnInit {
 
+
   teacherForm!: FormGroup;
   listMajor: any[] = majorData;
   majorDefault = 'SOFTWARE_ENGINEER';

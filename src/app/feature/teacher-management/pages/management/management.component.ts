@@ -13,12 +13,12 @@ import {TeacherDetailModalComponent} from '../../components/teacher-detail-modal
 export class ManagementComponent implements OnInit, AfterViewInit {
 
   loading = false;
-  @ViewChild(MdbTableDirective, { static: true }) mdbTable!: MdbTableDirective;
-  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination!: MdbTablePaginationComponent;
-  @ViewChild('row', { static: true }) row!: ElementRef;
+  @ViewChild(MdbTableDirective, {static: true}) mdbTable!: MdbTableDirective;
+  @ViewChild(MdbTablePaginationComponent, {static: true}) mdbTablePagination!: MdbTablePaginationComponent;
+  @ViewChild('row', {static: true}) row!: ElementRef;
 
-  headElements = ['stt', 'name', 'email', 'birth day', 'Location', 'command'];
-  sort = ['i', 'name', 'email', 'birthDay', 'location', 'command'];
+  headElements = ['#', 'image', 'name', 'email', 'birthday', 'Location', 'Status' , 'command'];
+  sort = ['#', 'name', 'image', 'email', 'birthDay', 'location', 'status' , 'command'];
   searchText = '';
   previous!: string;
   modalRef!: MDBModalRef;
@@ -29,30 +29,34 @@ export class ManagementComponent implements OnInit, AfterViewInit {
   constructor(private cdRef: ChangeDetectorRef,
               private modalService: MDBModalService,
               private teacherService: TeacherService
-  ) {}
+  ) {
+  }
 
 
   ngOnInit(): void {
+    this.loading = true;
     this.initData();
   }
+
   initData(): void {
     this.teacherService.getListTeacher().subscribe(res => {
       this.elements = res;
       this.mdbTable.setDataSource(this.elements);
       this.elements = this.mdbTable.getDataSource();
       this.previous = this.mdbTable.getDataSource();
+      this.loading = false;
     });
   }
+
   ngAfterViewInit(): void {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
-
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
   }
+
   searchItems(): void {
     const prev = this.mdbTable.getDataSource();
-
     if (!this.searchText) {
       this.mdbTable.setDataSource(this.previous);
       this.elements = this.mdbTable.getDataSource();
@@ -71,15 +75,18 @@ export class ManagementComponent implements OnInit, AfterViewInit {
       this.mdbTablePagination.calculateLastItemIndex();
     });
   }
+
   onCreateTeacher(): void {
     const modalOptions = {
-      class: 'modal-md',
+      class: 'modal-lg',
     };
     this.modalRef = this.modalService.show(TeacherModalComponent, modalOptions);
     this.modalRef.content.saveButtonClicked.subscribe((res: any) => {
+      this.loading = true;
       this.initData();
     });
   }
+
   onDetailTeacher(id: string): void {
     const modalOptions = {
       class: 'modal-lg',
@@ -88,6 +95,10 @@ export class ManagementComponent implements OnInit, AfterViewInit {
       }
     };
     this.modalRef = this.modalService.show(TeacherDetailModalComponent, modalOptions);
+    this.modalRef.content.saveButtonClicked.subscribe((res: any) => {
+      this.loading = true;
+      this.initData();
+    });
   }
 
 }

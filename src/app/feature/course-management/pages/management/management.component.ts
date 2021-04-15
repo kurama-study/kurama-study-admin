@@ -18,7 +18,7 @@ export class ManagementComponent implements OnInit, AfterViewInit {
   @ViewChild('row', { static: true }) row!: ElementRef;
 
   elements: CourseModel[] = [];
-  headElements = ['stt', 'name', 'student', 'lesson', 'status' , 'command'];
+  headElements = ['#', 'name', 'student quantity', 'lesson quantity', 'status' , 'command'];
 
   searchText = '';
   previous!: string;
@@ -34,17 +34,21 @@ export class ManagementComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.courseService.getListCourse().subscribe(res => {
-      this.loading = false;
+    this.loading = true;
+    this.initData();
+  }
 
+  initData(): void {
+    this.courseService.getListCourse().subscribe(res => {
       this.listCourse = res;
       this.elements = res;
       this.mdbTable.setDataSource(this.elements);
       this.elements = this.mdbTable.getDataSource();
       this.previous = this.mdbTable.getDataSource();
+      this.loading = false;
+
     });
   }
-
   ngAfterViewInit(): void {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
 
@@ -78,6 +82,16 @@ export class ManagementComponent implements OnInit, AfterViewInit {
       class: 'modal-lg',
     };
     this.modalRef = this.modalService.show(CourseModalComponent, modalOptions);
+    this.modalRef.content.saveButtonClicked.subscribe((res: any) => {
+      this.loading = true;
+      this.initData();
+    });
+  }
+
+  updateStatus(id: string, status: boolean, index: number): void {
+    this.courseService.updateStatus(id, status).subscribe(res => {
+      this.elements[index].status = res.status;
+    });
   }
 
 }
