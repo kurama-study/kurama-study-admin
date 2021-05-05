@@ -10,4 +10,6 @@ export interface CourseModel {
   calendars: CalendarModel[];
   status: boolean;
   teacher: TeacherModel;
+  studentRegistered: number;
+  learned: number;
 }

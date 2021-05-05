@@ -45,9 +45,9 @@
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
                   class="red-text">{{el.name}}</td>
               <td
-                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.studentQuantity}}</td>
+                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.studentRegistered}}/{{el.studentQuantity}}</td>
               <td
-                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.lessonQuantity}}</td>
+                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.learned}}/{{el.lessonQuantity}}</td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                 <a (click)="updateStatus(el._id, false, i)">
                   <mdb-badge [pill]="true" [success]="true" *ngIf="el.status == true">Active</mdb-badge>

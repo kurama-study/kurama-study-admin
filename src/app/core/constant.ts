@@ -23,6 +23,9 @@ export const ApiURI = {
   DELETE_TEACHER: 'admin/teacher/deleteTeacher',
   GET_TEACHER_BY_MAJOR: 'admin/teacher/getTeacherByMajor',
 
+  GET_LIST_STUDENT: 'admin/student/getListStudent',
+  CREATE_STUDENT: 'admin/student/createStudent',
+
   GET_LIST_CALENDAR_OF_TEACHER: 'calendar/getListCalendarOfTeacher'
 };
 export const LocalStorage = {

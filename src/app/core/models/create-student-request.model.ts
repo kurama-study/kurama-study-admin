@@ -1,4 +1,4 @@
-export interface CreateTeacherRequest {
+export interface CreateStudentRequestModel {
   email: string;
   name: string;
   password: string;

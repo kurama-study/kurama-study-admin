@@ -1,130 +1,158 @@
 <div class="card">
   <table mdbTable mdbTableScroll [scrollY]="true" maxHeight="900">
 
-  <div class="card-header">
-    <h6 class="h6">Create Course</h6>
-  </div>
-  <div class="card-body">
-    <form [formGroup]="courseForm">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="md-form">
-            <input mdbInput type="text" id="nameCourse" formControlName="name" [mdbValidate]="true" class="form-control">
-            <label for="nameCourse" class="">Name Course</label>
-            <mdb-error class="mt-1" *ngIf="f.name.hasError('required') && (f.name.dirty || f.name.touched)">Course name not be empty</mdb-error>
+    <div class="card-header">
+      <h6 class="h6">Create Course</h6>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="courseForm">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="md-form">
+              <input mdbInput type="text" id="nameCourse" formControlName="name" [mdbValidate]="true"
+                     class="form-control">
+              <label for="nameCourse" class="">Name Course</label>
+              <mdb-error class="mt-1" *ngIf="f.name.hasError('required') && (f.name.dirty || f.name.touched)">Course
+                name not be empty
+              </mdb-error>
 
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="md-form">
-            <input mdbInput type="number" id="studentTotal" formControlName="studentQuantity" [mdbValidate]="true" class="form-control">
-            <label for="studentTotal" class="">Student Quantity</label>
-            <mdb-error class="mt-1" *ngIf="f.studentQuantity.hasError('required') && (f.studentQuantity.dirty || f.studentQuantity.touched)">Student quantity not be empty</mdb-error>
-            <mdb-error class="mt-1" *ngIf="f.studentQuantity.hasError('min') && (f.studentQuantity.dirty || f.studentQuantity.touched)">Quantity must be greater than 1</mdb-error>
+          <div class="col-md-4">
+            <div class="md-form">
+              <input mdbInput type="number" id="studentTotal" formControlName="studentQuantity" [mdbValidate]="true"
+                     class="form-control">
+              <label for="studentTotal" class="">Student Quantity</label>
+              <mdb-error class="mt-1"
+                         *ngIf="f.studentQuantity.hasError('required') && (f.studentQuantity.dirty || f.studentQuantity.touched)">
+                Student quantity not be empty
+              </mdb-error>
+              <mdb-error class="mt-1"
+                         *ngIf="f.studentQuantity.hasError('min') && (f.studentQuantity.dirty || f.studentQuantity.touched)">
+                Quantity must be greater than 1
+              </mdb-error>
 
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="md-form">
-            <input mdbInput type="number" id="lesson" formControlName="lessonQuantity" [mdbValidate]="true" class="form-control">
-            <label for="lesson" class="">Lesson Quantity</label>
-            <mdb-error class="mt-1" *ngIf="f.lessonQuantity.hasError('required') && (f.lessonQuantity.dirty || f.lessonQuantity.touched)">Lesson quantity not be empty</mdb-error>
-            <mdb-error class="mt-1" *ngIf="f.lessonQuantity.hasError('min') && (f.lessonQuantity.dirty || f.lessonQuantity.touched)">Quantity must be greater than 1</mdb-error>
+          <div class="col-md-4">
+            <div class="md-form">
+              <input mdbInput type="number" id="lesson" formControlName="lessonQuantity" [mdbValidate]="true"
+                     class="form-control">
+              <label for="lesson" class="">Lesson Quantity</label>
+              <mdb-error class="mt-1"
+                         *ngIf="f.lessonQuantity.hasError('required') && (f.lessonQuantity.dirty || f.lessonQuantity.touched)">
+                Lesson quantity not be empty
+              </mdb-error>
+              <mdb-error class="mt-1"
+                         *ngIf="f.lessonQuantity.hasError('min') && (f.lessonQuantity.dirty || f.lessonQuantity.touched)">
+                Quantity must be greater than 1
+              </mdb-error>
 
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <label class="">Major</label>
-          <ng-select [items]="listMajor" bindLabel="name" (change)="getTeacherByMajor($event)" bindValue="code" [(ngModel)]="majorDefault"
-                     [ngModelOptions]="{standalone: true}" [multiple]="false"></ng-select>
-        </div>
-        <div class="col-md-5">
-          <label class="">Teacher</label>
-          <ng-select [items]="listTeacher" bindLabel="name" bindValue="_id" (change)="onSelectTeacher($event)" [(ngModel)]="teacherSelected" [ngModelOptions]="{standalone: true}" [multiple]="false">
-            <ng-template ng-label-tmp let-item="item">
-              <img  *ngIf="item.imgUrl" src="{{item.imgUrl}}" height="30" alt="avatar">
-              <span  class="p-1 cus-label" >
+          <div class="col-md-4">
+            <label class="">Major</label>
+            <ng-select [items]="listMajor" bindLabel="name" (change)="getTeacherByMajor($event)" bindValue="code"
+                       [(ngModel)]="majorDefault"
+                       [ngModelOptions]="{standalone: true}" [multiple]="false"></ng-select>
+          </div>
+          <div class="col-md-3">
+            <label class="">Teacher</label>
+            <ng-select [items]="listTeacher" bindLabel="name" bindValue="_id" (change)="onSelectTeacher()"
+                       [(ngModel)]="teacherSelected" [ngModelOptions]="{standalone: true}" [multiple]="false">
+              <ng-template ng-label-tmp let-item="item">
+                <img *ngIf="item.imgUrl" src="{{item.imgUrl}}" height="30" alt="avatar">
+                <span class="p-1 cus-label">
                           {{item.name}}
                         </span>
 
-            </ng-template>
-            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-              <img  *ngIf="item.imgUrl" src="{{item.imgUrl}}" height="30">
-              <span  class="p-1 cus-label" >
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                <img *ngIf="item.imgUrl" src="{{item.imgUrl}}" height="30">
+                <span class="p-1 cus-label">
                           {{item.name}}
                         </span>
-            </ng-template>
-          </ng-select>
-        </div>
-        <div class="col-md-3 text-center">
-          <div class="custom-control custom-switch" style="margin-top: 35px">
-            <input type="checkbox" formControlName="status" class="custom-control-input" id="customSwitch1" checked>
-            <label class="custom-control-label" for="customSwitch1">Active</label>
+              </ng-template>
+            </ng-select>
           </div>
-        </div>
-        <div class="col-md-12 mt-4" *ngIf="teacherSelected">
+          <div class="col-md-3">
+            <label class="">Tín chỉ</label>
+            <ng-select [items]="prices" bindLabel="name" bindValue="priceId" [(ngModel)]="priceDefault" [ngModelOptions]="{standalone: true}" [multiple]="false"></ng-select>
+          </div>
+          <div class="col-md-2 text-center">
+            <div class="custom-control custom-switch" style="margin-top: 35px">
+              <input type="checkbox" formControlName="status" class="custom-control-input" id="customSwitch1" checked>
+              <label class="custom-control-label" for="customSwitch1">Active</label>
+            </div>
+          </div>
+          <div class="col-md-12 mt-4" *ngIf="teacherSelected">
             <app-calendar-teacher-modal [listCalendar]="createSubject"></app-calendar-teacher-modal>
-        </div>
-        <div class="col-md-12 text-center mt-4">
-          <h6 class="float-left">Calendar</h6>
-          <div class="table-responsive">
-            <table mdbTable mdbTableScroll [scrollY]="true" maxHeight="400" [bordered]="true">
-              <thead>
-              <tr>
-                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let el of calendarList; index as i">
-                <th scope="row">
-                  <a (click)="onRemoveCalender(i)">
-                    <mdb-badge [danger]="true">
-                      <mdb-icon fas icon="times"></mdb-icon>
-                    </mdb-badge>
-                  </a>
-                </th>
-                <td>{{el.date | date:'dd/MM/yyyy, h:mm a'}}</td>
-                <td>{{el.note}}</td>
-              </tr>
-              <tr>
-                <th scope="row" style=" padding-top: 35px;">
-                  <a (click)="onAddCalender()">
-                    <mdb-badge [success]="true">
-                      <mdb-icon fas icon="plus"></mdb-icon>
-                    </mdb-badge>
-                  </a>
-                </th>
-                <td>
-                  <div class="md-form m-0">
-                    <input mdbInput type="datetime-local" [(ngModel)]="dateCourse" [ngModelOptions]="{standalone: true}" id="day" class="form-control">
-                  </div>
-                </td>
-                <td>
-                  <div class="md-form m-0">
-                    <input mdbInput type="text" [(ngModel)]="noteCourse" [ngModelOptions]="{standalone: true}" id="note" class="form-control">
-                    <label for="note" class="">Note</label>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
           </div>
+          <div class="col-md-12 text-center mt-4">
+            <h6 class="float-left">Calendar</h6>
+            <div class="table-responsive">
+              <table mdbTable mdbTableScroll [scrollY]="true" maxHeight="400" [bordered]="true">
+                <thead>
+                <tr>
+                  <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let el of calendarList; index as i">
+                  <th scope="row">
+                    <a (click)="onRemoveCalender(i)">
+                      <mdb-badge [danger]="true">
+                        <mdb-icon fas icon="times"></mdb-icon>
+                      </mdb-badge>
+                    </a>
+                  </th>
+                  <td>{{el.date | date:'dd/MM/yyyy, h:mm a'}}</td>
+                  <td>{{el.note}}</td>
+                </tr>
+                <tr>
+                  <th scope="row" style=" padding-top: 35px;">
+                    <a (click)="onAddCalender()">
+                      <mdb-badge [success]="true">
+                        <mdb-icon fas icon="plus"></mdb-icon>
+                      </mdb-badge>
+                    </a>
+                  </th>
+                  <td>
+                    <div class="md-form m-0">
+                      <input mdbInput type="datetime-local" [(ngModel)]="dateCourse"
+                             [ngModelOptions]="{standalone: true}" id="day" class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="md-form m-0">
+                      <input mdbInput type="text" [(ngModel)]="noteCourse" [ngModelOptions]="{standalone: true}"
+                             id="note" class="form-control">
+                      <label for="note" class="">Note</label>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
 
-        </div>
-        <div class="col-md-12 mt-3">
-          <div class="alert alert-danger" *ngIf="messError" role="alert">
-            {{messError}}
+          </div>
+          <div class="col-md-12 mt-3">
+            <div class="alert alert-danger" *ngIf="messError" role="alert">
+              {{messError}}
+            </div>
           </div>
         </div>
-      </div>
-    </form>
-  </div>
-  <div class="card-footer">
-    <button [ngClass]="courseForm.status==='VALID' && teacherSelected && calendarList.length>0?'': 'disabled'" (click)="onCreateCourse()" size="sm" *ngIf="!loading" mdbBtn type="button"  color="primary" [block]="true"  mdbWavesEffect>Create</button>
-    <button mdbBtn color="primary" *ngIf="loading" size="sm" [block]="true" type="button" disabled>
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      Loading...
-    </button>
-  </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <button [ngClass]="courseForm.status==='VALID' && teacherSelected && calendarList.length>0?'': 'disabled'"
+              (click)="onCreateCourse()" size="sm" *ngIf="!loading" mdbBtn type="button" color="primary" [block]="true"
+              mdbWavesEffect>Create
+      </button>
+      <button mdbBtn color="primary" *ngIf="loading" size="sm" [block]="true" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+    </div>
   </table>
 </div>

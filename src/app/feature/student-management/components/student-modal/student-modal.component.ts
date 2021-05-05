@@ -1,24 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {majorData} from '../../../../../assets/major.data';
-import {TeacherService} from '../../../../core/services/teacher.service';
-import {CreateTeacherRequestModel} from '../../../../core/models/create-teacher-request.model';
-import {Subject} from 'rxjs';
-import {MDBModalService} from 'angular-bootstrap-md';
 import {UserInfoModel} from '../../../../core/models/user-info.model';
+import {Subject} from 'rxjs';
+import {TeacherService} from '../../../../core/services/teacher.service';
+import {MDBModalService} from 'angular-bootstrap-md';
 import {CommonService} from '../../../../core/services/common.service';
-import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {CreateTeacherRequestModel} from '../../../../core/models/create-teacher-request.model';
+import {finalize} from 'rxjs/operators';
+import {StudentService} from '../../../../core/services/student.service';
 
 @Component({
-  selector: 'app-teacher-modal',
-  templateUrl: './teacher-modal.component.html',
-  styleUrls: ['./teacher-modal.component.scss']
+  selector: 'app-student-modal',
+  templateUrl: './student-modal.component.html',
+  styleUrls: ['./student-modal.component.scss']
 })
-export class TeacherModalComponent implements OnInit {
+export class StudentModalComponent implements OnInit {
 
-
-  teacherForm!: FormGroup;
+  studentForm!: FormGroup;
   listMajor: any[] = majorData;
   majorDefault = 'SOFTWARE_ENGINEER';
   loading = false;
@@ -34,11 +34,11 @@ export class TeacherModalComponent implements OnInit {
   public saveButtonClicked: Subject<any> = new Subject<any>();
 
   constructor(private fb: FormBuilder,
-              private teacherService: TeacherService,
+              private studentService: StudentService,
               private modalService: MDBModalService,
               private commonService: CommonService,
               private storage: AngularFireStorage) {
-    this.teacherForm = this.fb.group({
+    this.studentForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       location: ['', Validators.required],
@@ -49,7 +49,7 @@ export class TeacherModalComponent implements OnInit {
   }
 
   get f(): any {
-    return this.teacherForm.controls;
+    return this.studentForm.controls;
   }
 
   ngOnInit(): void {
@@ -66,7 +66,7 @@ export class TeacherModalComponent implements OnInit {
       major: this.majorDefault,
       imgUrl: this.imgUrl
     };
-    this.teacherService.createTeacher(teacherRequest).subscribe(res => {
+    this.studentService.createStudent(teacherRequest).subscribe(res => {
       this.saveButtonClicked.next(res);
       this.modalService.hide(1);
       this.loading = false;

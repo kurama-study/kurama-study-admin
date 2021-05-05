@@ -5,4 +5,7 @@ export interface CreateCourseRequestModel {
   lessonQuantity: number;
   status: boolean;
   teacher: string;
+  price: string;
+  studentRegistered: number;
+  learned: number;
 }

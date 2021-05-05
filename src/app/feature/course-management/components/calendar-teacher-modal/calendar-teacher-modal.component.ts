@@ -26,7 +26,7 @@ export class CalendarTeacherModalComponent implements OnInit {
       this.calendarList.forEach(value => {
         const event = {
           start: new Date(value.date),
-          title: 'A 3 day event',
+          title: value.note,
           allDay: true,
           resizable: {
             beforeStart: true,
@@ -35,7 +35,6 @@ export class CalendarTeacherModalComponent implements OnInit {
           draggable: true,
         };
         this.events.push(event);
-        console.log(this.events);
       });
     });
   }

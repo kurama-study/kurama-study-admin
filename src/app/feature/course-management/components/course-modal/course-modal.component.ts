@@ -18,6 +18,7 @@ export class CourseModalComponent implements OnInit {
   courseForm!: FormGroup;
   listMajor: any[] = majorData;
   majorDefault = 'SOFTWARE_ENGINEER';
+  priceDefault = 'price_1IkrCrLvq3qxmN4hq6rCr6oJ';
   listTeacher: any[] = [];
   teacherSelected!: string;
   dateCourse!: Date;
@@ -29,6 +30,25 @@ export class CourseModalComponent implements OnInit {
   messError = '';
   calendarListOfTeacher: CalendarModel[] = [];
   createSubject = new Subject<CalendarModel[]>();
+
+  prices: any[] = [
+    {
+      name: '2 Tính chỉ',
+      priceId: 'price_1IkrCrLvq3qxmN4hq6rCr6oJ',
+      price: 10.000,
+    },
+    {
+      name: '4 Tín chỉ',
+      priceId: 'price_1IkrCrLvq3qxmN4hQq6ivGTB',
+      price: 20.000
+    },
+    {
+      name: '6 Tín chỉ',
+      priceId: 'price_1IkrCrLvq3qxmN4h8UQmVL5q',
+      price: 40.000
+    }
+  ];
+
   constructor(private fb: FormBuilder,
               private teacherService: TeacherService,
               private courseService: CourseService,
@@ -47,7 +67,7 @@ export class CourseModalComponent implements OnInit {
       lessonQuantity: ['', [Validators.required, Validators.min(1)]],
       status: [true, Validators.required],
     });
-    this.teacherService.getTeacherByMajor(this.majorDefault).subscribe((res) => {
+    this.teacherService.getTeacherByMajor(this.majorDefault, 'USER_TEACHER').subscribe((res) => {
       res.forEach((teacher) => {
         this.listTeacher = [...this.listTeacher, {
           name: teacher.name,
@@ -88,7 +108,8 @@ export class CourseModalComponent implements OnInit {
   validateCalendar(calender: CalendarModel): void {
     if (this.calendarList.length > 0) {
       const dateLate = this.calendarList[this.calendarList.length - 1].date;
-      if (new Date(this.dateCourse).getTime() - new Date(dateLate).getTime() >= 2700000) {
+      if (new Date(this.dateCourse).getTime() - new Date(dateLate).getTime() >= 2700000
+        && this.calendarList.length < this.f.lessonQuantity.value) {
         this.calendarList.push(calender);
         this.messError = '';
       } else {
@@ -105,7 +126,7 @@ export class CourseModalComponent implements OnInit {
   }
 
   getTeacherByMajor(value: any): void {
-    this.teacherService.getTeacherByMajor(value.code).subscribe(res => {
+    this.teacherService.getTeacherByMajor(value.code, 'USER_TEACHER').subscribe(res => {
       this.listTeacher = [];
       this.teacherSelected = '';
       res.forEach((teacher) => {
@@ -118,7 +139,7 @@ export class CourseModalComponent implements OnInit {
     });
   }
 
-  onSelectTeacher(value: any): void {
+  onSelectTeacher(): void {
     this.messError = '';
     this.calendarService.getListCalendarOfTeacher(this.teacherSelected).subscribe(res => {
       this.createSubject.next(res);
@@ -133,12 +154,17 @@ export class CourseModalComponent implements OnInit {
       status: this.f.status.value,
       teacher: this.teacherSelected,
       lessonQuantity: this.f.studentQuantity.value,
-      studentQuantity: this.f.lessonQuantity.value
+      studentQuantity: this.f.lessonQuantity.value,
+      price: this.priceDefault,
+      studentRegistered: 0,
+      learned: 0
     };
     this.courseService.createCourse(createCourseRequest, this.calendarList).subscribe(res => {
       this.saveButtonClicked.next(res);
       this.modalService.hide(1);
       this.loading = false;
-    }, error => this.loading = false);
+    }, error => {
+      this.loading = error;
+    });
   }
 }
