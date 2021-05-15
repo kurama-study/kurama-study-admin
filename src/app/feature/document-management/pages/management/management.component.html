@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="md-form">
+        <input mdbInput type="text" [(ngModel)]="topic" id="topic" class="form-control">
+        <label for="topic" class="">Topic</label>
+      </div>
+      <div class="md-form">
+        <input mdbInput type="text" [(ngModel)]="agenda" id="agenda" class="form-control">
+        <label for="agenda" class="">Agenda</label>
+      </div>
+      <div class="md-form">
+        <input mdbInput type="date" [(ngModel)]="date" id="date" class="form-control">
+        <label for="date" class="">Meeting date</label>
+      </div>
+      <div class="md-form">
+        <input mdbInput type="number" [(ngModel)]="start" id="start" class="form-control">
+        <label for="start" class="">Start time</label>
+      </div>
+      <div class="md-form">
+        <input mdbInput type="number" [(ngModel)]="duration" id="duration" class="form-control">
+        <label for="duration" class="">Duration</label>
+      </div>
+    </div>
+    <button type="button" mdbBtn size="sm" color="primary" (click)="onCreate()" mdbWavesEffect>Create</button>
+
+  </div>
+</div>
+<!--<div class="container text-center">-->
+<!--  <iframe src="https://calendar.google.com/calendar/embed?height=500&amp;wkst=1&amp;bgcolor=%23039BE5&amp;ctz=Asia%2FHo_Chi_Minh&amp;color=%23D81B60&amp;showTitle=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showTz=0" style="border:solid 1px #777" width="1000" height="500" frameborder="0" scrolling="no"></iframe></div>-->

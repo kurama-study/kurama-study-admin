@@ -25,6 +25,7 @@ export const ApiURI = {
 
   GET_LIST_STUDENT: 'admin/student/getListStudent',
   CREATE_STUDENT: 'admin/student/createStudent',
+  CREATE_LIST_CALENDER: 'admin/zoom/create',
 
   GET_LIST_CALENDAR_OF_TEACHER: 'calendar/getListCalendarOfTeacher'
 };

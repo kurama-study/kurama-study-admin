@@ -9,7 +9,7 @@ import {UserInfoModel} from '../models/user-info.model';
   providedIn: 'root'
 })
 export class CommonService {
-  protected CONST = CONST;
+  public CONST = CONST;
   currentUser!: Observable<UserInfoModel>;
   currentUserSubject!: BehaviorSubject<any>;
   private readonly backendUrl = environment.backend_url;

@@ -14,8 +14,8 @@ export class CourseService extends CommonService {
     return this.get(CONST.ApiURI.GET_LIST_COURSE);
   }
 
-  createCourse(courseRequest: CreateCourseRequestModel, listCalendar: CalendarModel[]): Observable<CourseModel> {
-    return this.post(CONST.ApiURI.CREATE_COURSE, {course: courseRequest, calenders: listCalendar});
+  createCourse(courseRequest: CreateCourseRequestModel): Observable<CourseModel> {
+    return this.post(CONST.ApiURI.CREATE_COURSE, {course: courseRequest});
   }
 
   updateStatus(idCourse: string, statusCourse: boolean): Observable<CourseModel> {

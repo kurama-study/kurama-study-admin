@@ -8,6 +8,7 @@ import {CalendarModel} from '../../../../core/models/calendar.model';
 import {Subject} from 'rxjs';
 import {MDBModalService} from 'angular-bootstrap-md';
 import {CalendarService} from '../../../../core/services/calendar.service';
+import {ZoomService} from '../../../../core/services/zoom.service';
 
 @Component({
   selector: 'app-course-modal',
@@ -53,7 +54,8 @@ export class CourseModalComponent implements OnInit {
               private teacherService: TeacherService,
               private courseService: CourseService,
               private modalService: MDBModalService,
-              private calendarService: CalendarService) {
+              private calendarService: CalendarService,
+              private zoomService: ZoomService) {
   }
 
   get f(): any {
@@ -159,10 +161,12 @@ export class CourseModalComponent implements OnInit {
       studentRegistered: 0,
       learned: 0
     };
-    this.courseService.createCourse(createCourseRequest, this.calendarList).subscribe(res => {
-      this.saveButtonClicked.next(res);
-      this.modalService.hide(1);
-      this.loading = false;
+    this.courseService.createCourse(createCourseRequest).subscribe(course => {
+      this.zoomService.createZoomMeeting(this.calendarList, course).subscribe(res => {
+        this.saveButtonClicked.next(res);
+        this.modalService.hide(1);
+        this.loading = false;
+      });
     }, error => {
       this.loading = error;
     });
