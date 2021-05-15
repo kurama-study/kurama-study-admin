@@ -5,4 +5,5 @@ export interface UserInfoModel {
   email: string;
   role: string;
   token: string;
+  imgUrl: string;
 }

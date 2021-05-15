@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend_url: 'http://localhost:3002/',
+  backend_url: 'https://frenchii.dk/kurama/',
   firebaseConfig: {
     apiKey: 'AIzaSyDpz1kQ7j6KuWe-RUFIntXdnpc_iCW2e0U',
     authDomain: 'kurama-admin.firebaseapp.com',
