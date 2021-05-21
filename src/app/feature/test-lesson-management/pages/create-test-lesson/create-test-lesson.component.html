@@ -1,1 +1,87 @@
-<p>create-test-lesson works!</p>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <button routerLink="/test-lesson-management" class="float-left" type="button" size="sm" [outline]="true" mdbBtn
+              color="warning" mdbWavesEffect>Cancel
+      </button>
+      <ng-select (change)="conChange($event)" [items]="courses" bindLabel="name" bindValue="_id" class="float-right"
+                 style="width: 250px"></ng-select>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3>Test lesson <label *ngIf="courseSelected">: {{courseSelected.name}}</label></h3>
+        </div>
+        <div class="col-md-12 pb-3" *ngIf="testLesson.questions.length">
+          <div class="card mb-3 p-2" *ngFor="let question of testLesson.questions; index as i">
+            <p class="mb-0">Câu {{i + 1}}:</p>
+            <p>{{question.question}}</p>
+            <div class="row">
+              <div class="col-md-3" *ngFor="let answer of question.answers; index as j">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input  type="radio" class="custom-control-input" [id]="i+'_'+j" [name]="i" mdbInput>
+                  <label class="custom-control-label" [for]="i+'_'+j">
+                  </label>
+                  <input mdbInput type="text" class="form-control" value="{{answer.answer}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+
+          <div class="card p-2">
+            <p>Câu {{testLesson.questions.length+1}}:</p>
+            <textarea class="md-textarea form-control " [(ngModel)]="questionText" rows="3" id="input_text" mdbInput></textarea>
+            <div class="row mt-3">
+              <div class="col-md-3 text-center">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="a" name="inlineDefaultRadiosExample"
+                         mdbInput>
+                  <label class="custom-control-label" for="a">
+                  </label>
+                  <input mdbInput [(ngModel)]="answerA" type="text" class="form-control">
+                </div>
+
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="b" name="inlineDefaultRadiosExample"
+                         mdbInput>
+                  <label class="custom-control-label" for="b">
+                  </label>
+                  <input mdbInput [(ngModel)]="answerB" type="text" class="form-control">
+
+                </div>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="c" name="inlineDefaultRadiosExample"
+                         mdbInput>
+                  <label class="custom-control-label" for="c"></label>
+                  <input mdbInput type="text" [(ngModel)]="answerC" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="d" name="inlineDefaultRadiosExample"
+                         mdbInput>
+                  <label class="custom-control-label" for="d"></label>
+                  <input mdbInput type="text" [(ngModel)]="answerD" class="form-control">
+
+                </div>
+              </div>
+              <div class="col-md-12">
+                <a class="float-right mt-3" (click)="onAdd()">
+                  <mdb-badge [pill]="true" [primary]="true">+ Add</mdb-badge>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ export const FontURI = {
   COURSE_MANAGEMENT: 'course-management',
   TEACHER_MANAGEMENT: 'teacher-management',
   DOCUMENT_MANAGEMENT: 'document-management',
+  TEST_LESSON_MANAGEMENT: 'test-lesson-management',
   HOME: 'home',
   DASHBOARD: 'dashboard'
 };
