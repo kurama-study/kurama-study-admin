@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-md-3" *ngFor="let answer of question.answers; index as j">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input  type="radio" class="custom-control-input" [id]="i+'_'+j" [name]="i" mdbInput>
+                  <input [value]="question.score" [checked]="question.score === answer.answer" type="radio" class="custom-control-input" [id]="i+'_'+j" [name]="i" mdbInput>
                   <label class="custom-control-label" [for]="i+'_'+j">
                   </label>
                   <input mdbInput type="text" class="form-control" value="{{answer.answer}}">
@@ -36,7 +36,7 @@
             <div class="row mt-3">
               <div class="col-md-3 text-center">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="a" name="inlineDefaultRadiosExample"
+                  <input type="radio" value="0" (change)="onCheck(answerA)" class="custom-control-input" id="a" name="inlineDefaultRadiosExample"
                          mdbInput>
                   <label class="custom-control-label" for="a">
                   </label>
@@ -46,7 +46,7 @@
               </div>
               <div class="col-md-3 text-center">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="b" name="inlineDefaultRadiosExample"
+                  <input type="radio" value="1" (change)="onCheck(answerB)" class="custom-control-input" id="b" name="inlineDefaultRadiosExample"
                          mdbInput>
                   <label class="custom-control-label" for="b">
                   </label>
@@ -56,15 +56,15 @@
               </div>
               <div class="col-md-3 text-center">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="c" name="inlineDefaultRadiosExample"
+                  <input type="radio" value="2" (change)="onCheck(answerC)" class="custom-control-input" id="c" name="inlineDefaultRadiosExample"
                          mdbInput>
                   <label class="custom-control-label" for="c"></label>
-                  <input mdbInput type="text" [(ngModel)]="answerC" class="form-control">
+                  <input mdbInput type="text"  [(ngModel)]="answerC" class="form-control">
                 </div>
               </div>
               <div class="col-md-3 text-center">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="d" name="inlineDefaultRadiosExample"
+                  <input type="radio" value="3" (change)="onCheck(answerD)" class="custom-control-input" id="d" name="inlineDefaultRadiosExample"
                          mdbInput>
                   <label class="custom-control-label" for="d"></label>
                   <input mdbInput type="text" [(ngModel)]="answerD" class="form-control">
@@ -72,7 +72,7 @@
                 </div>
               </div>
               <div class="col-md-12">
-                <a class="float-right mt-3" (click)="onAdd()">
+                <a class="float-right mt-3 " [ngClass]="courseSelected? '': 'disabled'" (click)="onAdd()">
                   <mdb-badge [pill]="true" [primary]="true">+ Add</mdb-badge>
                 </a>
               </div>
@@ -82,6 +82,13 @@
 
         </div>
       </div>
+    </div>
+    <div class="card-footer">
+      <button class="float-right" [ngClass]="courseSelected && testLesson.questions.length > 0? '': 'disabled'"  type="button" *ngIf="!loading" size="sm" [outline]="true" mdbBtn color="primary" mdbWavesEffect (click)="onSave()">Save</button>
+      <button mdbBtn color="primary" *ngIf="loading" size="sm" class="float-right" type="button" [outline]="true" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
     </div>
   </div>
 </div>

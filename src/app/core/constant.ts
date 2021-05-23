@@ -23,7 +23,10 @@ export const ApiURI = {
   GET_DETAIL_TEACHER: 'admin/teacher/getDetailTeacher',
   DELETE_TEACHER: 'admin/teacher/deleteTeacher',
   GET_TEACHER_BY_MAJOR: 'admin/teacher/getTeacherByMajor',
-
+  CREATE_TEST_LESSON: 'admin/test/createTestLesson',
+  GET_LIST_TEST_LESSON: 'admin/test/getListTestByCourse',
+  GET_DETAIL_TEST_LESSON: 'admin/test/getDetailTestLesson',
+  DELETE_TEST_LESSON: 'admin/test/deleteTestLesson',
   GET_LIST_STUDENT: 'admin/student/getListStudent',
   CREATE_STUDENT: 'admin/student/createStudent',
   CREATE_LIST_CALENDER: 'zoom/create',

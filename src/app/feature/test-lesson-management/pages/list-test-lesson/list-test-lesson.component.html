@@ -4,7 +4,20 @@
       <button routerLink="create" class="float-right" type="button" size="sm" [outline]="true" mdbBtn color="primary" mdbWavesEffect>Create </button>
     </div>
     <div class="card-body">
-
+      <div class="text-center text-primary" *ngIf="!tests">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let test of tests">
+          <button class="custom-btn mb-3" [title]="test.name" routerLink="detail/{{test._id}}" type="button" mdbBtn [block]="true"
+                  mdbWavesEffect>
+            <i class="fas fa-folder-open ml-3 float-left"></i>
+            <span class="ml-3 float-left">{{test.name | slice: 0: 13}} <span *ngIf="test.name.length >= 13">...</span></span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

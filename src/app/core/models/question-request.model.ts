@@ -1,7 +1,6 @@
 import {AnswerModel} from './answer.model';
 
-export interface QuestionModel {
-  _id: string;
+export interface QuestionRequestModel {
   question: string;
   answers: AnswerModel[];
   score: string;

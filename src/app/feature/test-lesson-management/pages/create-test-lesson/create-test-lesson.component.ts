@@ -4,6 +4,10 @@ import {CourseModel} from '../../../../core/models/course.model';
 import {TestLessonModel} from '../../../../core/models/test-lesson.model';
 import {QuestionModel} from '../../../../core/models/question.model';
 import {AnswerModel} from '../../../../core/models/answer.model';
+import {TestLessonService} from '../../../../core/services/test-lesson.service';
+import {QuestionRequestModel} from '../../../../core/models/question-request.model';
+import {TestLessonRequestModel} from '../../../../core/models/test-lesson-request.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-test-lesson',
@@ -19,11 +23,16 @@ export class CreateTestLessonComponent implements OnInit {
   answerB = '';
   answerC = '';
   answerD = '';
-  testLesson: TestLessonModel = {
+  scoreSelected = '';
+  testLesson: TestLessonRequestModel = {
     questions: [],
+    name: ''
   };
-
-  constructor(private courseService: CourseService) {
+  answers: AnswerModel[] = [];
+  loading = false;
+  constructor(private courseService: CourseService,
+              private testLessonService: TestLessonService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -36,14 +45,23 @@ export class CreateTestLessonComponent implements OnInit {
     this.courseSelected = value;
   }
   onAdd() {
-    const answers: AnswerModel[] = [{answer :this.answerA}, {answer :this.answerB}, {answer: this.answerC}, {answer: this.answerD}]
-    const questionItem: QuestionModel = {
+    this.answers = [{answer :this.answerA}, {answer :this.answerB}, {answer: this.answerC}, {answer: this.answerD}]
+    const questionItem: QuestionRequestModel = {
       question: this.questionText,
-      answers: answers,
-      score: ''
+      answers: this.answers,
+      score: this.scoreSelected,
     }
-    console.log(questionItem)
+    this.testLesson.name = this.courseSelected.name;
     this.testLesson.questions.push(questionItem);
+  }
+  onSave() {
+    this.loading = true;
+    this.testLessonService.createTestLesson(this.testLesson, this.courseSelected._id).subscribe(res => {
+      this.router.navigate(['/test-lesson-management'])
+    }, error => this.loading = false)
+  }
+  onCheck(value: any) {
+    this.scoreSelected = value;
   }
 
 }
