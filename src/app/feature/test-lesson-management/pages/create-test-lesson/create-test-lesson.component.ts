@@ -8,6 +8,8 @@ import {TestLessonService} from '../../../../core/services/test-lesson.service';
 import {QuestionRequestModel} from '../../../../core/models/question-request.model';
 import {TestLessonRequestModel} from '../../../../core/models/test-lesson-request.model';
 import {Router} from '@angular/router';
+import {UserInfoModel} from '../../../../core/models/user-info.model';
+import {CommonService} from '../../../../core/services/common.service';
 
 @Component({
   selector: 'app-create-test-lesson',
@@ -30,15 +32,21 @@ export class CreateTestLessonComponent implements OnInit {
   };
   answers: AnswerModel[] = [];
   loading = false;
+  currentUser!: UserInfoModel;
   constructor(private courseService: CourseService,
               private testLessonService: TestLessonService,
-              private router: Router) {
+              private router: Router,
+              private commonService: CommonService) {
   }
 
   ngOnInit(): void {
-    this.courseService.getListCourse().subscribe(res => {
-      this.courses = res;
-    });
+    this.commonService.currentUser.subscribe(res => {
+      this.currentUser = res;
+      this.courseService.getCourseOfTeacher(this.currentUser._id).subscribe(res => {
+        this.courses = res;
+      });
+    })
+
   }
 
   conChange(value: any) {

@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import * as CONST from '../core/constant';
 import {UserGuard} from '../shared/guards/user.guard';
 import {AuthGuard} from '../shared/guards/auth.guard';
+import {TeacherGuard} from '../shared/guards/teacher.guard';
+import {CalendaModule} from './calendar/calendar.module';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: CONST.FontURI.AUTH},
@@ -14,7 +16,6 @@ const routes: Routes = [
   },
   {
     path: CONST.FontURI.DASHBOARD, loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [UserGuard]
   },
   {
     path: CONST.FontURI.TEACHER_MANAGEMENT,
@@ -34,7 +35,17 @@ const routes: Routes = [
   {
     path: CONST.FontURI.TEST_LESSON_MANAGEMENT,
     loadChildren: () => import('./test-lesson-management/test-lesson-management.module').then(m => m.TestLessonManagementModule),
-    canActivate: [UserGuard]
+    canActivate: [TeacherGuard]
+  },
+  {
+    path: CONST.FontURI.COURSE_TEACHER,
+    loadChildren: () => import('./course-teacher-management/course-teacher.module').then(m => m.CourseTeacherModule),
+    canActivate: [TeacherGuard]
+  },
+  {
+    path: CONST.FontURI.CALENDAR_LIST,
+    loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendaModule),
+    canActivate: [TeacherGuard]
   }
 ];
 

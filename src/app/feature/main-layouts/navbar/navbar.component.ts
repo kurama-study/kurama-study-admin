@@ -14,8 +14,18 @@ export class NavbarComponent implements OnInit {
   routing = CONST.FontURI;
   currentUser!: UserInfoModel;
   loading = false;
+  isAdmin = false;
+  isTeacher = false;
   constructor(private commonService: CommonService, private authService: AuthService, private router: Router) {
-    this.commonService.currentUser.subscribe(res => this.currentUser = res);
+    this.commonService.currentUser.subscribe(res => {
+      this.currentUser = res;
+      if (this.currentUser.role === 'ADMIN') {
+        this.isAdmin = true;
+      }
+      if (this.currentUser.role === 'USER_TEACHER') {
+        this.isTeacher = true;
+      }
+    });
   }
 
   ngOnInit(): void {

@@ -6,8 +6,10 @@ export const FontURI = {
   TEACHER_MANAGEMENT: 'teacher-management',
   DOCUMENT_MANAGEMENT: 'document-management',
   TEST_LESSON_MANAGEMENT: 'test-lesson-management',
+  CALENDAR_LIST: 'calendar',
   HOME: 'home',
-  DASHBOARD: 'dashboard'
+  DASHBOARD: 'dashboard',
+  COURSE_TEACHER: 'course-teacher'
 };
 export const ApiURI = {
   LOGIN: 'auth/login',
@@ -30,6 +32,10 @@ export const ApiURI = {
   GET_LIST_STUDENT: 'admin/student/getListStudent',
   CREATE_STUDENT: 'admin/student/createStudent',
   CREATE_LIST_CALENDER: 'zoom/create',
+
+  GET_LIST_TEST_OF_TEACHER: 'teacher/test/getListTest',
+  CHANGE_STATUS_TEST: 'teacher/test/changeStatus',
+  GET_COURSE_OF_TEACHER: 'teacher/course/getListCourse',
 
   GET_LIST_CALENDAR_OF_TEACHER: 'calendar/getListCalendarOfTeacher'
 };

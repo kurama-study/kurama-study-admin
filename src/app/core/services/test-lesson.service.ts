@@ -18,4 +18,12 @@ export class TestLessonService extends CommonService {
   deleteTestLesson(test: string): Observable<any> {
     return this.post(this.CONST.ApiURI.DELETE_TEST_LESSON, {test: test});
   }
+
+
+  getListTestOfTeacher(uid: string): Observable<TestLessonModel[]> {
+    return this.post(this.CONST.ApiURI.GET_LIST_TEST_OF_TEACHER, {uid: uid});
+  }
+  changeStatusTest(test: string): Observable<any> {
+    return this.post(this.CONST.ApiURI.CHANGE_STATUS_TEST, {test: test});
+  }
 }

@@ -7,7 +7,7 @@ import {CommonService} from '../../core/services/common.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuard implements CanActivate {
+export class TeacherGuard implements CanActivate {
   currentUser!: UserInfoModel;
 
   constructor(private commonService: CommonService) {
@@ -17,7 +17,7 @@ export class UserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.currentUser.role === 'ADMIN';
+    return this.currentUser.role === 'USER_TEACHER';
   }
 
 }

@@ -36,4 +36,10 @@ export class TestLessonDetailComponent implements OnInit {
     }, error => this.loading = false)
   }
 
+  onChangeStatus() {
+    this.testLessonService.changeStatusTest(this.testId).subscribe(res => {
+      this.testLesson.status = !this.testLesson.status;
+    })
+  }
+
 }

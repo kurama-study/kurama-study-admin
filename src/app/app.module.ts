@@ -11,6 +11,8 @@ import {environment} from '../environments/environment';
 import {BUCKET} from '@angular/fire/storage';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {DatePipe} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,12 @@ import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
     FeatureRouting,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
-
+    BrowserAnimationsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: BUCKET, useValue: 'gs://kurama-admin.appspot.com'}
+    {provide: BUCKET, useValue: 'gs://kurama-admin.appspot.com'},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

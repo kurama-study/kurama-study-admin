@@ -26,6 +26,9 @@
           </div>
         </div>
         <div class="col-md-12">
+          <button type="button" *ngIf="testLesson && testLesson.status === false" (click)="onChangeStatus()" class="float-left" mdbBtn color="success" [outline]="true" size="sm" mdbWavesEffect>Start</button>
+          <button type="button" *ngIf="testLesson && testLesson.status === true" (click)="onChangeStatus()" class="float-left" mdbBtn color="warning" [outline]="true" size="sm" mdbWavesEffect>Stop</button>
+
           <button type="button" *ngIf="testLesson && !loading" (click)="onDelete()" class="float-right" mdbBtn color="danger" [outline]="true" size="sm" mdbWavesEffect>Delete</button>
           <button mdbBtn color="danger" *ngIf="loading" size="sm" class="float-right" type="button" [outline]="true" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

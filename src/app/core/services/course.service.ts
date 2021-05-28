@@ -22,4 +22,9 @@ export class CourseService extends CommonService {
     return this.post(CONST.ApiURI.UPDATE_STATUS_COURSE, {id: idCourse, status: statusCourse});
   }
 
+
+  getCourseOfTeacher(uid: string): Observable<CourseModel[]> {
+    return this.post(CONST.ApiURI.GET_COURSE_OF_TEACHER, {uid: uid});
+  }
+
 }
