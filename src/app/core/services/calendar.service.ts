@@ -12,4 +12,8 @@ export class CalendarService extends CommonService {
   getListCalendar(uid: string): Observable<Calendar[]> {
     return this.get(this.CONST.ApiURI.GET_LIST_CALENDAR_OF_TEACHER + `?teacher=${uid}`);
   }
+
+  getCalendarByCourse(course: string): Observable<CalendarModel[]> {
+    return this.get(this.CONST.ApiURI.GET_CALENDAR_BY_COURSE + `?course=${course}`);
+  }
 }

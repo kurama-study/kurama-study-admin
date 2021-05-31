@@ -3,6 +3,7 @@ import {CourseService} from '../../../../core/services/course.service';
 import {CourseModel} from '../../../../core/models/course.model';
 import {MDBModalRef, MDBModalService, MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import {CourseModalComponent} from '../../components/course-modal/course-modal.component';
+import {CourseDetailModalComponent} from '../../components/course-detail-modal/course-detail-modal.component';
 
 @Component({
   selector: 'app-management',
@@ -91,6 +92,19 @@ export class ManagementComponent implements OnInit, AfterViewInit {
   updateStatus(id: string, status: boolean, index: number): void {
     this.courseService.updateStatus(id, status).subscribe(res => {
       this.elements[index].status = res.status;
+    });
+  }
+
+  onDetail(idCourse: string): void {
+    const modalOptions = {
+      class: 'modal-lg',
+      data: {
+        course: idCourse,
+      }
+    };
+    this.modalRef = this.modalService.show(CourseDetailModalComponent, modalOptions);
+    this.modalRef.content.saveButtonClicked.subscribe((res: any) => {
+      this.initData();
     });
   }
 

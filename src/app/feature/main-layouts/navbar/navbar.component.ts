@@ -32,10 +32,8 @@ export class NavbarComponent implements OnInit {
   }
   onLogout(): void {
     this.loading = true;
-    this.authService.logout(this.currentUser._id, this.currentUser.token).subscribe(res => {
       this.commonService.removeLocalStorage(CONST.LocalStorage.USER_INFO);
       this.router.navigate([CONST.FontURI.AUTH, CONST.FontURI.LOGIN]);
-    }, error => this.loading = false);
   }
 
 

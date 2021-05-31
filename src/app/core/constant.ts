@@ -14,7 +14,9 @@ export const FontURI = {
 export const ApiURI = {
   LOGIN: 'auth/login',
   LOGOUT: 'auth/logout',
+  GET_COURSE_BY_ID: 'student/course/getFindById',
 
+  GET_CALENDAR_BY_COURSE: 'calendar/getListCalendarOfCourse',
 
   GET_LIST_COURSE: 'admin/course/getListCourse',
   CREATE_COURSE: 'admin/course/createCourse',

@@ -1,0 +1,43 @@
+<div class="card" >
+  <div class="card-header" *ngIf="courseDetail">
+    <h6 class="h4">{{courseDetail.name}}</h6>
+  </div>
+  <div class="card-body">
+    <div class="card"  *ngIf="teacherInfo">
+      <div class="card-header">
+        <h6 class="h6">Teacher info</h6>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="{{teacherInfo.imgUrl}}" alt="thumbnail" class="img-thumbnail"
+                 style="width: 100px">
+          </div>
+          <div class="col-md-5 small dark-grey-text">
+            <label>Full name: </label><span class="font-weight-bold"> {{teacherInfo.name}}</span><br>
+            <label>Email: </label><span class="font-weight-bold"> {{teacherInfo.email}}</span>
+
+          </div>
+          <div class="col-md-3 small dark-grey-text p-0">
+            <label>Location: </label><span class="font-weight-bold"> {{teacherInfo.location}}</span><br>
+            <label *ngIf="teacherInfo.major == 'SOFTWARE_ENGINEER'">Major: </label><span class="font-weight-bold " *ngIf="teacherInfo.major == 'SOFTWARE_ENGINEER'"> Software Engineer</span>
+            <label  *ngIf="teacherInfo.major == 'ECONOMICS'">Major: </label><span class="font-weight-bold " *ngIf="teacherInfo.major == 'ECONOMICS'"> Economics</span>
+            <label *ngIf="teacherInfo.major == 'POLITICAL'">Major: </label><span class="font-weight-bold " *ngIf="teacherInfo.major == 'POLITICAL'"> Political</span>
+            <label *ngIf="teacherInfo.major == 'COMPUTER_SCIENCE'">Major: </label><span class="font-weight-bold " *ngIf="teacherInfo.major == 'COMPUTER_SCIENCE'"> Computer Science</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+    <app-calendar-teacher-modal [listCalendar]="calendarList"></app-calendar-teacher-modal>
+    <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
+      {{error}}
+    </div>
+
+  </div>
+  <div class="card-footer" *ngIf="courseDetail">
+
+  </div>
+</div>

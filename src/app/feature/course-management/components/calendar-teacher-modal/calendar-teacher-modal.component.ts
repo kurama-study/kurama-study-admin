@@ -22,6 +22,7 @@ export class CalendarTeacherModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.listCalendar.subscribe(res => {
+      this.events = [];
       this.calendarList = res;
       this.calendarList.forEach(value => {
         const event = {

@@ -57,7 +57,7 @@
                 </a>
               </td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                <button size="sm" mdbBtn type="button" color="primary" [outline]="true" mdbWavesEffect>Detail</button>
+                <button size="sm" mdbBtn type="button" color="primary" [outline]="true" mdbWavesEffect (click)="onDetail(el._id)">Detail</button>
               </td>
 
             </tr>
