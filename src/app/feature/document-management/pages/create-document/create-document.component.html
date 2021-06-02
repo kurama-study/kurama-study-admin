@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <button routerLink="/document-management" class="float-left" type="button" size="sm" [outline]="true" mdbBtn
+              color="warning" mdbWavesEffect>Cancel
+      </button>
+      <ng-select (change)="conChange($event)" [items]="courses" bindLabel="name" bindValue="_id" class="float-right"
+                 style="width: 250px"></ng-select>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="md-form">
+            <input [(ngModel)]="name" mdbInput type="text" id="name" class="form-control">
+            <label for="name" class="">Name</label>
+          </div>
+          <button type="button" *ngIf="!loading" [ngClass]="doc && name && courseSelected ? '': 'disabled'" (click)="onSave()" size="sm" mdbBtn color="primary" mdbWavesEffect>Save</button>
+          <button mdbBtn size="sm" *ngIf="loading" color="primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input [(ngModel)]="doc" mdbInput type="text" id="form1" class="form-control">
+            <label for="form1" class="">Link</label>
+          </div>
+
+        </div>
+        <div class="col-md-12">
+          <ngx-doc-viewer
+            *ngIf="doc"
+            [url]="doc"
+            viewer="url"
+            style="width:100%;height:50vh;"
+          ></ngx-doc-viewer>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+

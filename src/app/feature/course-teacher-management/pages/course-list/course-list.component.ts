@@ -20,7 +20,7 @@ export class CourseListComponent implements OnInit {
   @ViewChild('row', { static: true }) row!: ElementRef;
 
   elements: CourseModel[] = [];
-  headElements = ['#', 'name', 'student quantity', 'lesson quantity', 'status' , 'command'];
+  headElements = ['#', 'name', 'student quantity', 'lesson quantity', 'status' ];
 
   searchText = '';
   previous!: string;

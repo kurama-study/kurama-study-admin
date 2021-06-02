@@ -22,11 +22,7 @@ export const ApiURI = {
   CREATE_COURSE: 'admin/course/createCourse',
   UPDATE_STATUS_COURSE: 'admin/course/updateStatus',
 
-  GET_LIST_TEACHER: 'admin/teacher/getListTeacher',
-  CREATE_TEACHER: 'admin/teacher/createTeacher',
-  GET_DETAIL_TEACHER: 'admin/teacher/getDetailTeacher',
-  DELETE_TEACHER: 'admin/teacher/deleteTeacher',
-  GET_TEACHER_BY_MAJOR: 'admin/teacher/getTeacherByMajor',
+
   CREATE_TEST_LESSON: 'admin/test/createTestLesson',
   GET_LIST_TEST_LESSON: 'admin/test/getListTestByCourse',
   GET_DETAIL_TEST_LESSON: 'admin/test/getDetailTestLesson',
@@ -35,9 +31,18 @@ export const ApiURI = {
   CREATE_STUDENT: 'admin/student/createStudent',
   CREATE_LIST_CALENDER: 'zoom/create',
 
+
   GET_LIST_TEST_OF_TEACHER: 'teacher/test/getListTest',
   CHANGE_STATUS_TEST: 'teacher/test/changeStatus',
   GET_COURSE_OF_TEACHER: 'teacher/course/getListCourse',
+  GET_LIST_TEACHER: 'admin/teacher/getListTeacher',
+  CREATE_TEACHER: 'admin/teacher/createTeacher',
+  GET_DETAIL_TEACHER: 'admin/teacher/getDetailTeacher',
+  DELETE_TEACHER: 'admin/teacher/deleteTeacher',
+  GET_TEACHER_BY_MAJOR: 'admin/teacher/getTeacherByMajor',
+  CREATE_DOCUMENT: 'teacher/document/createDocument',
+  GET_LIST_DOCUMENT: 'teacher/document/getListDocument',
+  DELETE_DOCUMENT: 'teacher/document/deleteDocument',
 
   GET_LIST_CALENDAR_OF_TEACHER: 'calendar/getListCalendarOfTeacher'
 };

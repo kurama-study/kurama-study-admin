@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: CONST.FontURI.DOCUMENT_MANAGEMENT,
     loadChildren: () => import('./document-management/document-management.module').then(m => m.DocumentManagementModule),
-    canActivate: [UserGuard]
+    canActivate: [TeacherGuard]
   },
   {
     path: CONST.FontURI.TEST_LESSON_MANAGEMENT,

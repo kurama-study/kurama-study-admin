@@ -24,7 +24,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FeatureRouting,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

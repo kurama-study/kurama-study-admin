@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
   ],
 })
 export class SharedModule {

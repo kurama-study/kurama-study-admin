@@ -23,6 +23,8 @@
         <mdb-icon fas icon="file" class="mr-2"></mdb-icon>Test lesson</a>
       <a  routerLinkActive="active" *ngIf="isTeacher" [routerLink]="routing.CALENDAR_LIST" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="calendar-alt" class="mr-2"></mdb-icon>Calendar</a>
+      <a  routerLinkActive="active" *ngIf="isTeacher" [routerLink]="routing.DOCUMENT_MANAGEMENT" class="list-group-item list-group-item-action waves-effect">
+        <mdb-icon fas icon="folder-open" class="mr-2"></mdb-icon>Document</a>
     </div>
 
   </div>
