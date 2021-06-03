@@ -12,5 +12,5 @@ export interface CourseModel {
   teacher: TeacherModel;
   studentRegistered: number;
   learned: number;
-
+  students: string[];
 }

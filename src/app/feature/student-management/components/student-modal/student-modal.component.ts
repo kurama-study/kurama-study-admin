@@ -10,6 +10,10 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {CreateTeacherRequestModel} from '../../../../core/models/create-teacher-request.model';
 import {finalize} from 'rxjs/operators';
 import {StudentService} from '../../../../core/services/student.service';
+import {StudentModel} from '../../../../core/models/student.model';
+import {DatePipe} from '@angular/common';
+import {CourseService} from '../../../../core/services/course.service';
+import {CourseModel} from '../../../../core/models/course.model';
 
 @Component({
   selector: 'app-student-modal',
@@ -26,18 +30,22 @@ export class StudentModalComponent implements OnInit {
   currentUser!: UserInfoModel;
   imgUrl!: string | ArrayBuffer | null;
   localImgUrl!: string | ArrayBuffer | null;
-
-
+  student!: StudentModel;
+  pipe = new DatePipe('en-US');
+  listId: string[]= []
   fileToUpload!: File | null;
-
-
+  elements: CourseModel[] = [];
+  headElements = ['#', 'name', 'student quantity', 'lesson quantity', 'status' , 'command'];
+  loadingDelete = false;
+  loadingUpdate = false;
   public saveButtonClicked: Subject<any> = new Subject<any>();
 
   constructor(private fb: FormBuilder,
               private studentService: StudentService,
               private modalService: MDBModalService,
               private commonService: CommonService,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private courseService: CourseService) {
     this.studentForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -45,7 +53,9 @@ export class StudentModalComponent implements OnInit {
       password: ['', Validators.required],
       birthDay: ['', Validators.required],
     });
-    this.commonService.currentUser.subscribe(res => this.currentUser = res);
+    this.commonService.currentUser.subscribe(res => {
+      this.currentUser = res;
+    });
   }
 
   get f(): any {
@@ -53,6 +63,23 @@ export class StudentModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.student) {
+      this.student.courses.forEach(value => {
+        this.listId.push(value.course);
+      })
+      this.courseService.getCourseByStudent(this.listId).subscribe(res => {
+          this.elements = res;
+      })
+      this.imgUrl = this.student.imgUrl;
+      this.studentForm.setValue({
+        email: this.student.email,
+        name: this.student.name,
+        location: this.student.location,
+        birthDay: this.pipe.transform(new Date(this.student.birthDay), 'yyyy-MM-dd'),
+        password: ''
+      });
+
+    }
   }
 
   conCreate(): void {
@@ -61,7 +88,7 @@ export class StudentModalComponent implements OnInit {
       name: this.f.name.value,
       birthDay: this.f.birthDay.value,
       location: this.f.location.value,
-      password: this.f.password.value,
+      password: '111111',
       email: this.f.email.value,
       major: this.majorDefault,
       imgUrl: this.imgUrl
@@ -112,5 +139,38 @@ export class StudentModalComponent implements OnInit {
         })
       ).subscribe();
     }
+  }
+
+  onCancel(course: string) {
+    this.studentService.cancelCourse(course, this.student._id).subscribe(res => {
+    });
+    this.studentService.cancelCourseStudent(course, this.student._id).subscribe(value => {
+      this.modalService.hide(1);
+      this.saveButtonClicked.next(value);
+    })
+  }
+  onDelete() {
+    this.storage.storage.refFromURL(this.student.imgUrl).delete().then(r => {
+      this.studentService.deleteStudent(this.student._id).subscribe(res => {
+        this.loadingDelete = true;
+        this.modalService.hide(1);
+        this.saveButtonClicked.next(res);
+      })
+    });
+  }
+
+  onUpdate() {
+    this.student.name = this.f.name.value;
+    this.student.email = this.f.email.value;
+    this.student.birthDay = this.f.birthDay.value;
+    this.student.location = this.f.location.value;
+    this.student.major = this.majorDefault;
+    this.student.password = this.f.password.value;
+    this.loadingUpdate = true;
+    this.studentService.updateStudent(this.student).subscribe(res => {
+      this.loadingUpdate = false;
+      this.modalService.hide(1);
+      this.saveButtonClicked.next(res);
+    })
   }
 }

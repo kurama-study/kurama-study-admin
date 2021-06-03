@@ -20,6 +20,7 @@ export class TeacherDetailModalComponent implements OnInit {
   teacher!: TeacherModel;
   formTeacher!: FormGroup;
   listMajor: any[] = majorData;
+  major= ''
   loadingDelete = false;
   loadingUpdate = false;
   messError = '';
@@ -38,7 +39,7 @@ export class TeacherDetailModalComponent implements OnInit {
       major: ['', Validators.required]
     });
   }
-
+  get f() {return  this.formTeacher.controls}
   ngOnInit(): void {
     this.teacherService.getTeacherDetail(this.idTeacher).subscribe(res => {
       this.teacher = res;
@@ -46,7 +47,7 @@ export class TeacherDetailModalComponent implements OnInit {
         name: res.name,
         email: res.email,
         location: res.location,
-        password: null,
+        password: '111111',
         birthDay: this.pipe.transform(new Date(res.birthDay), 'yyyy-MM-dd'),
         major: res.major
       });
@@ -54,6 +55,18 @@ export class TeacherDetailModalComponent implements OnInit {
   }
 
   onUpdate(): void {
+    this.teacher.name = this.f.name.value;
+    this.teacher.email = this.f.email.value;
+    this.teacher.birthDay = this.f.birthDay.value;
+    this.teacher.location = this.f.location.value;
+    this.teacher.major = this.f.major.value;
+    this.teacher.password = this.f.password.value;
+    this.loadingUpdate = true;
+    this.teacherService.updateTeacher(this.teacher).subscribe(res => {
+      this.loadingUpdate = false;
+      this.saveButtonClicked.next('');
+      this.modalService.hide(1);
+    })
   }
 
   onDelete(): void {

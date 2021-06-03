@@ -21,7 +21,12 @@ export const ApiURI = {
   GET_LIST_COURSE: 'admin/course/getListCourse',
   CREATE_COURSE: 'admin/course/createCourse',
   UPDATE_STATUS_COURSE: 'admin/course/updateStatus',
-
+  DELETE_COURSE: 'admin/course/deleteCourse',
+  CANCEL_COURSE_STUDENT: 'admin/student/cancelStudent',
+  DELETE_STUDENT: 'admin/student/deleteStudent',
+  UPDATE_STUDENT: 'admin/student/updateStudent',
+  UPDATE_TEACHER: 'admin/teacher/updateStudent',
+  GET_COURSE_BY_STUDENT: 'admin/course/getCourseByStudent',
 
   CREATE_TEST_LESSON: 'admin/test/createTestLesson',
   GET_LIST_TEST_LESSON: 'admin/test/getListTestByCourse',
@@ -29,6 +34,8 @@ export const ApiURI = {
   DELETE_TEST_LESSON: 'admin/test/deleteTestLesson',
   GET_LIST_STUDENT: 'admin/student/getListStudent',
   CREATE_STUDENT: 'admin/student/createStudent',
+  GET_LIST_STUDENT_BY_COURSE: 'admin/student/getListStudentByCourse',
+  CANCEL_COURSE: 'admin/student/cancelCourse',
   CREATE_LIST_CALENDER: 'zoom/create',
 
 

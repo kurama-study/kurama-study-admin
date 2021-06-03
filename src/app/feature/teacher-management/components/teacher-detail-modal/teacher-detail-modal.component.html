@@ -66,11 +66,11 @@
         </button>
       </div>
       <div class="col-md-6">
-        <button size="sm" mdbBtn type="button" color="primary" [block]="true"  mdbWavesEffect>Save</button>
-<!--        <button mdbBtn color="primary" *ngIf="loading" size="sm" [block]="true" type="button" disabled>-->
-<!--          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
-<!--          Loading...-->
-<!--        </button>-->
+        <button size="sm" mdbBtn type="button" *ngIf="!loadingUpdate" color="primary" [block]="true" (click)="onUpdate()"  mdbWavesEffect>Save</button>
+        <button mdbBtn color="primary" *ngIf="loadingUpdate" size="sm" [block]="true" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </button>
       </div>
     </div>
   </div>

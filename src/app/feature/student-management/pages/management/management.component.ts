@@ -82,6 +82,19 @@ export class ManagementComponent implements OnInit, AfterViewInit {
       this.initData();
     });
   }
+  onDetail(student: StudentModel) {
+    const modalOptions = {
+      class: 'modal-lg',
+      data: {
+        student: student
+      }
+    };
+    this.modalRef = this.modalService.show(StudentModalComponent, modalOptions);
+    this.modalRef.content.saveButtonClicked.subscribe((res: any) => {
+      this.loading = true;
+      this.initData();
+    });
+  }
 
 
 }

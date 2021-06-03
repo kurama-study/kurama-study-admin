@@ -26,18 +26,55 @@
             <label *ngIf="teacherInfo.major == 'COMPUTER_SCIENCE'">Major: </label><span class="font-weight-bold " *ngIf="teacherInfo.major == 'COMPUTER_SCIENCE'"> Computer Science</span>
 
           </div>
+
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <table mdbTable #tableEl="mdbTable" [stickyHeader]="true"
+               class=" text-center">
+          <thead class="sticky-top">
+          <tr>
+            <th *ngFor="let head of headElements; let i = index"
+                scope="col">{{head | titlecase}}
+            </th>
+          </tr>
+          </thead>
+          <tbody #row>
+          <tr *ngFor="let el of elements; let i = index">
+            <th
+              scope="row">{{i+1}}</th>
+            <th class="pt-0">
+              <img class="img-thumbnail mt-2" *ngIf="el.imgUrl" style="width: 50px" [src]="el.imgUrl" >
+            </th>
+            <td
+              class="red-text">{{el.name}}</td>
+            <td>{{el.email}}</td>
+            <td >
+              <button size="sm" mdbBtn type="button" color="primary" (click)="onCancel(el._id)" [outline]="true" mdbWavesEffect>Cancel
+              </button>
+            </td>
+
+          </tr>
+          </tbody>
+
+        </table>
       </div>
     </div>
 
     <br/>
-    <app-calendar-teacher-modal [listCalendar]="calendarList"></app-calendar-teacher-modal>
     <div class="alert alert-danger mt-3" role="alert" *ngIf="error">
       {{error}}
     </div>
 
   </div>
   <div class="card-footer" *ngIf="courseDetail">
-
+    <button size="sm" [ngClass]="courseDetail.studentRegistered == 0 ? '' :'disabled'"  *ngIf="!loadingDelete" (click)="onDelete()" mdbBtn type="button" color="primary"  [outline]="true" mdbWavesEffect>Delete
+    </button>
+    <button size="sm" *ngIf="loadingDelete" [outline]="true" mdbBtn color="primary" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
   </div>
 </div>

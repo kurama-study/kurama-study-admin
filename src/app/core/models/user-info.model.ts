@@ -6,4 +6,5 @@ export interface UserInfoModel {
   role: string;
   token: string;
   imgUrl: string;
+
 }

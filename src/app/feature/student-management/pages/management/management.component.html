@@ -59,7 +59,7 @@
                 <mdb-badge [pill]="true" [danger]="true" *ngIf="el.status == false">Pending</mdb-badge>
               </td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                <button size="sm" mdbBtn type="button" color="primary" [outline]="true" mdbWavesEffect
+                <button size="sm" mdbBtn type="button" (click)="onDetail(el)" color="primary" [outline]="true" mdbWavesEffect
                         >Detail
                 </button>
               </td>

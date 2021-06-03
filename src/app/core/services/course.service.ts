@@ -30,5 +30,11 @@ export class CourseService extends CommonService {
   getCourseById(request: any): Observable<{ course: CourseModel, teacher: TeacherModel }> {
     return this.post(CONST.ApiURI.GET_COURSE_BY_ID, request);
   }
+  deleteCourse(id: string): Observable<any> {
+    return this.post(CONST.ApiURI.DELETE_COURSE, {id: id})
+  }
+  getCourseByStudent(listId: string[]): Observable<CourseModel[]> {
+    return this.post(CONST.ApiURI.GET_COURSE_BY_STUDENT, {listCourseId: listId})
+  }
 
 }
