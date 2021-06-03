@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {CourseService} from '../../../../core/services/course.service';
+import {TestLessonService} from '../../../../core/services/test-lesson.service';
+import {CommonService} from '../../../../core/services/common.service';
+import {CourseModel} from '../../../../core/models/course.model';
 
 
 @Component({
@@ -10,33 +14,22 @@ import {HttpClient} from '@angular/common/http';
 export class ManagementComponent implements OnInit {
 
 
-  topic = '';
-  agenda = '';
-  date = '';
-  start = 0;
-  duration = 0;
-  api = 'https://api.zoom.us/v2/users/OPbNpbfAR9ysZttKzOtJdQ/meetings';
-  constructor(private http: HttpClient) {
+  documentList = []
+  courses!: CourseModel[];
+  constructor(private courseService: CourseService, private testLessonService: TestLessonService, private commonService: CommonService) {
 
   }
 
   ngOnInit(): void {
-
+    this.commonService.currentUser.subscribe(res => {
+      this.courseService.getCourseOfTeacher(res._id).subscribe(value => {
+        this.courses = value;
+      })
+    })
   }
 
   onCreate(): void {
-    this.http.post('http://localhost:3002/kurama/zoom/test', {}).subscribe(res => {
-      console.log(res);
-    });
-    // const reqBody = {
-    //   topic: this.topic,
-    //   start_time: this.date,
-    //   duration: this.duration,
-    //   agenda: this.agenda
-    // };
-    // this.http.post(this.api, reqBody, ).subscribe(res => {
-    //   console.log(res);
-    // });
+
   }
 
 

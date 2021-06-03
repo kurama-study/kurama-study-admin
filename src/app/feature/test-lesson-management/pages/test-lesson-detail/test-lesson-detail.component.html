@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6">
+          <button type="button" routerLink="/test-lesson-management" mdbBtn color="warning" size="sm" [outline]="true" mdbWavesEffect>Cancel</button>
+        </div>
+
+        <div class="col-md-6 text-center">
+          <h3>Test lesson <label *ngIf="testLesson">: {{testLesson.name}}</label></h3>
+        </div>
+
+        <div class="col-md-12 pb-3" >
+          <div class="card mb-3 p-2" *ngFor="let question of questions; index as i">
+            <p class="mb-0"><label class="font-weight-bold">Câu {{i + 1}}:</label> <label class="ml-3 font-weight-bolder">{{question.question}}</label></p>
+            <div class="row">
+              <div class="col-md-3" *ngFor="let answer of question.answers; index as j">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input disabled [value]="question.score" [checked]="question.score === answer.answer" type="radio" class="custom-control-input" [id]="i+'_'+j" [name]="i" mdbInput>
+                  <label class="custom-control-label" [for]="i+'_'+j">
+                  </label>
+                  <input disabled mdbInput type="text" class="form-control" value="{{answer.answer}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button type="button" *ngIf="testLesson && testLesson.status === false" (click)="onChangeStatus()" class="float-left" mdbBtn color="success" [outline]="true" size="sm" mdbWavesEffect>Start</button>
+          <button type="button" *ngIf="testLesson && testLesson.status === true" (click)="onChangeStatus()" class="float-left" mdbBtn color="warning" [outline]="true" size="sm" mdbWavesEffect>Stop</button>
+
+          <button type="button" *ngIf="testLesson && !loading" (click)="onDelete()" class="float-right" mdbBtn color="danger" [outline]="true" size="sm" mdbWavesEffect>Delete</button>
+          <button mdbBtn color="danger" *ngIf="loading" size="sm" class="float-right" type="button" [outline]="true" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+
+        </div>
+      </div>
+      <div class="text-center text-primary" *ngIf="!testLesson">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

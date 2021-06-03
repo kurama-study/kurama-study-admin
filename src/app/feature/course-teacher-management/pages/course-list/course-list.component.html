@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="md-form">
+                <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="searchItems()"
+                       id="search-input"
+                       mdbInput>
+                <label for="search-input">Search</label>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div class="table-responsive">
+          <div class="d-flex pb-5 justify-content-center" *ngIf="loading">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <table mdbTable #tableEl="mdbTable" [stickyHeader]="true" [hover]="true"
+                 class="z-depth-1 text-center">
+            <thead class="sticky-top">
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="elements" [sortBy]="headElements[i]"
+                  scope="col">{{head | titlecase}}
+                <mdb-icon fas icon="sort" *ngIf="head !== 'command' && head !== '#'"></mdb-icon>
+              </th>
+            </tr>
+            </thead>
+            <tbody #row>
+            <tr *ngFor="let el of elements; let i = index">
+              <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                  scope="row">{{i + 1}}</th>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                  class="red-text">{{el.name}}</td>
+              <td
+                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.studentRegistered}}/{{el.studentQuantity}}</td>
+              <td
+                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.lessonQuantity}}</td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                <a (click)="updateStatus(el._id, false, i)">
+                  <mdb-badge [pill]="true" [success]="true" *ngIf="el.status == true">Active</mdb-badge>
+                </a>
+                <a (click)="updateStatus(el._id, true, i)">
+                  <mdb-badge [pill]="true" [danger]="true" *ngIf="el.status == false">Pending</mdb-badge>
+                </a>
+              </td>
+
+            </tr>
+            </tbody>
+            <tfoot class="grey lighten-5 w-100">
+            <tr>
+              <td colspan="5">
+                <mdb-table-pagination [tableEl]="tableEl" paginationAlign=""
+                                      [searchDataSource]="elements"></mdb-table-pagination>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

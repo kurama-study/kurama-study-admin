@@ -10,4 +10,5 @@ export interface TeacherModel {
   courses: CourseModel [];
   imgUrl: string;
   status: boolean;
+  password: string;
 }

@@ -38,15 +38,10 @@ export class LoginFormComponent implements OnInit {
       password: this.f.password.value
     };
     this.authService.login(loginRequest).subscribe(res => {
-      if (res.user.role === 'ADMIN') {
         res.user.token = res.token;
         this.commonService.setLocalStorage(CONST.LocalStorage.USER_INFO, res.user);
         this.router.navigate([CONST.FontURI.DASHBOARD]);
-      } else {
-        this.error = true;
         this.loading = false;
-      }
-      this.loading = false;
     }, error => {
       this.loading = false;
       this.error = true;

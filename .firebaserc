@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "kurama-admin"
+  },
+  "targets": {
+    "kurama-admin": {
+      "hosting": {
+        "kurama-study-admin": [
+          "kurama-admin"
+        ]
+      }
+    }
   }
 }

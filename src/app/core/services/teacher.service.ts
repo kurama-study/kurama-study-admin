@@ -21,4 +21,7 @@ export class TeacherService extends CommonService{
   getTeacherByMajor(majorTeacher: string, roleTeacher: string): Observable<TeacherModel[]> {
     return this.get(this.CONST.ApiURI.GET_TEACHER_BY_MAJOR + `?major=${majorTeacher}&&role=${roleTeacher}`);
   }
+  updateTeacher(teacherReq: TeacherModel): Observable<any> {
+    return this.post(this.CONST.ApiURI.UPDATE_TEACHER, {userUpdate: teacherReq});
+  }
 }

@@ -7,7 +7,12 @@ export interface StudentModel {
   birthDay: Date;
   location: string;
   major: string;
-  courses: CourseModel [];
+  courses: {
+    course: string,
+    status: boolean,
+    score: number
+  } [];
   imgUrl: string;
   status: boolean;
+  password: string;
 }

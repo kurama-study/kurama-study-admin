@@ -5,6 +5,7 @@ import {CourseModel} from '../models/course.model';
 import * as CONST from '../constant';
 import {CreateCourseRequestModel} from '../models/create-course-request.model';
 import {CalendarModel} from '../models/calendar.model';
+import {TeacherModel} from '../models/teacher.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +21,20 @@ export class CourseService extends CommonService {
 
   updateStatus(idCourse: string, statusCourse: boolean): Observable<CourseModel> {
     return this.post(CONST.ApiURI.UPDATE_STATUS_COURSE, {id: idCourse, status: statusCourse});
+  }
+
+
+  getCourseOfTeacher(uid: string): Observable<CourseModel[]> {
+    return this.post(CONST.ApiURI.GET_COURSE_OF_TEACHER, {uid: uid});
+  }
+  getCourseById(request: any): Observable<{ course: CourseModel, teacher: TeacherModel }> {
+    return this.post(CONST.ApiURI.GET_COURSE_BY_ID, request);
+  }
+  deleteCourse(id: string): Observable<any> {
+    return this.post(CONST.ApiURI.DELETE_COURSE, {id: id})
+  }
+  getCourseByStudent(listId: string[]): Observable<CourseModel[]> {
+    return this.post(CONST.ApiURI.GET_COURSE_BY_STUDENT, {listCourseId: listId})
   }
 
 }

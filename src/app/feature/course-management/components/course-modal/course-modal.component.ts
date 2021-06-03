@@ -35,17 +35,17 @@ export class CourseModalComponent implements OnInit {
   prices: any[] = [
     {
       name: '2 Tính chỉ',
-      priceId: 'price_1IkrCrLvq3qxmN4hq6rCr6oJ',
+      priceId: 10000,
       price: 10.000,
     },
     {
       name: '4 Tín chỉ',
-      priceId: 'price_1IkrCrLvq3qxmN4hQq6ivGTB',
+      priceId: 20000,
       price: 20.000
     },
     {
       name: '6 Tín chỉ',
-      priceId: 'price_1IkrCrLvq3qxmN4h8UQmVL5q',
+      priceId: 40000,
       price: 40.000
     }
   ];
