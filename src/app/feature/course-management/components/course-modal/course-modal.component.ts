@@ -155,8 +155,8 @@ export class CourseModalComponent implements OnInit {
       name: this.f.name.value,
       status: this.f.status.value,
       teacher: this.teacherSelected,
-      lessonQuantity: this.f.studentQuantity.value,
-      studentQuantity: this.f.lessonQuantity.value,
+      lessonQuantity: this.f.lessonQuantity.value,
+      studentQuantity: this.f.studentQuantity.value,
       price: this.priceDefault,
       studentRegistered: 0,
       learned: 0

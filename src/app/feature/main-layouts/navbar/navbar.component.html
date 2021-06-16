@@ -1,16 +1,13 @@
 <header>
   <div class="sidebar-fixed position-fixed fixed-top">
 
-    <a class="logo-wrapper waves-effect text-center ml-4" [routerLink]="routing.DASHBOARD">
+    <a class="logo-wrapper waves-effect text-center ml-4" [routerLink]="routing.STUDENT_MANAGEMENT">
       <img src="../../../../assets/baby_kurama_by_vesrom_d8glp1n-fullview.png" class="img-fluid" alt="">
       <h4 class="h4">KURAMA</h4>
     </a>
 
     <div class="list-group list-group-flush" >
 
-      <a  routerLinkActive="active" [routerLink]="routing.DASHBOARD" class="list-group-item list-group-item-action waves-effect">
-        <mdb-icon fas icon="chart-pie" class="mr-2"></mdb-icon>Dashboard
-      </a>
       <a  routerLinkActive="active" *ngIf="isAdmin" [routerLink]="routing.STUDENT_MANAGEMENT" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="users" *ngIf="isAdmin" class="mr-2"></mdb-icon>Student </a>
       <a  routerLinkActive="active" *ngIf="isAdmin" [routerLink]="routing.TEACHER_MANAGEMENT" class="list-group-item list-group-item-action waves-effect">
